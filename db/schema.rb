@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130531132825) do
+ActiveRecord::Schema.define(version: 20130531143013) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "landmarks", force: true do |t|
+    t.string   "location",                                                             null: false
+    t.string   "city"
+    t.string   "suburb"
+    t.string   "street"
+    t.spatial  "coordinates", limit: {:srid=>4326, :type=>"point", :geographic=>true}, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "landmarks", ["coordinates"], :name => "index_landmarks_on_coordinates", :spatial => true
 
   create_table "people", force: true do |t|
     t.string   "name"
@@ -23,7 +39,7 @@ ActiveRecord::Schema.define(version: 20130531132825) do
     t.datetime "updated_at"
   end
 
-  add_index "people", ["authentication_token"], name: "index_people_on_authentication_token", unique: true, using: :btree
-  add_index "people", ["push_token"], name: "index_people_on_push_token", unique: true, using: :btree
+  add_index "people", ["authentication_token"], :name => "index_people_on_authentication_token", :unique => true
+  add_index "people", ["push_token"], :name => "index_people_on_push_token", :unique => true
 
 end
