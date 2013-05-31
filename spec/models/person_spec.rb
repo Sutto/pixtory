@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Person do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it 'should require a push token'
+
+  it 'should generate an auth token'
+
+  it 'should let you update the location'
+
 end
