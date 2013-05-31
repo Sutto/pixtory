@@ -21,6 +21,7 @@ gem 'faraday'
 gem 'net-http-persistent'
 
 gem 'google_maps_geocoder'
+gem 'addressable'
 
 group :doc do
   gem 'sdoc', require: false
@@ -36,5 +37,6 @@ end
 group :test do
   gem 'simplecov', require: nil
   gem 'syntax', require: nil
-  gem 'rr', require: nil
+  gem 'rr', '~> 1.0.0', require: nil
+  gem 'debugger'
 end

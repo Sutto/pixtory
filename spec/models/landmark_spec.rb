@@ -5,7 +5,7 @@ describe Landmark do
   let(:fake_result) do
     {
       city:        'Perth',
-      coordinates: 'POINT(120, 120)',
+      coordinates: 'POINT(10 20)',
       street:      'Test Street',
       suburb:      'Perth'
     }
@@ -21,10 +21,12 @@ describe Landmark do
     subject.street.should be_nil
     subject.suburb.should be_nil
     mock(Landmark).geocode('fake address') { fake_result }
+    subject.location = 'fake address'
     subject.city.should == fake_result[:city]
-    subject.coordinates.should == fake_result[:coordinates]
     subject.street.should == fake_result[:street]
     subject.suburb.should == fake_result[:suburb]
+    subject.coordinates.lat.should == 20.0
+    subject.coordinates.lon.should == 10.0
   end
 
   it 'should let you look up the location from the point' do

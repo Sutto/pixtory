@@ -15,7 +15,7 @@ class Landmark < ActiveRecord::Base
   end
 
   def self.geocode(address)
-    geocoded    =  GoogleMapsGeocoder.new location
+    geocoded    =  GoogleMapsGeocoder.new address
     {
       city:        'Perth',
       coordinates: "POINT(#{geocoded.lng} #{geocoded.lat})",
