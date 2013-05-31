@@ -36,6 +36,11 @@ GEM
     coderay (1.0.9)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
+    google_maps_geocoder (0.3.0)
+      activesupport
+      rack
     hike (1.2.2)
     hiredis (0.4.5)
     i18n (0.6.4)
@@ -48,6 +53,8 @@ GEM
     mime-types (1.23)
     minitest (4.7.4)
     multi_json (1.7.4)
+    multipart-post (1.2.0)
+    net-http-persistent (2.8)
     oj (2.0.14)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -139,7 +146,10 @@ DEPENDENCIES
   active_model_serializers
   activerecord-postgis-adapter
   awesome_print
+  faraday
+  google_maps_geocoder
   hiredis
+  net-http-persistent
   oj
   pg
   pry-rails

@@ -9,7 +9,7 @@ development:
   username: pixtory
   password:
 
-development:
+test:
   adapter: postgis
   encoding: unicode
   postgis_extension: true

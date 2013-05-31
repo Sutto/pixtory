@@ -17,6 +17,11 @@ gem 'redis', require: %w(redis/connection/hiredis redis)
 gem 'active_model_serializers'
 gem 'pry-rails'
 
+gem 'faraday'
+gem 'net-http-persistent'
+
+gem 'google_maps_geocoder'
+
 group :doc do
   gem 'sdoc', require: false
 end
