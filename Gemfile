@@ -6,7 +6,6 @@ gem 'rails', '4.0.0.rc1'
 gem 'pg'
 gem 'rails_config'
 
-gem 'heroku'
 gem 'unicorn'
 
 gem 'awesome_print', require: nil
