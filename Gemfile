@@ -23,6 +23,10 @@ gem 'net-http-persistent'
 gem 'google_maps_geocoder'
 gem 'addressable'
 
+gem 'fog'
+gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
+gem 'mini_magick'
+
 group :doc do
   gem 'sdoc', require: false
 end
