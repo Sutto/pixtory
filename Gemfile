@@ -29,6 +29,7 @@ gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
 gem 'mini_magick'
 
 gem 'bugsnag'
+gem 'new_relic-rpm'
 
 group :doc do
   gem 'sdoc', require: false
