@@ -21,6 +21,8 @@ gem 'pry-rails'
 gem 'faraday'
 gem 'net-http-persistent'
 
+gem 'chronic'
+
 gem 'google_maps_geocoder'
 gem 'addressable'
 
