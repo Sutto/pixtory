@@ -20,4 +20,14 @@ class Moment < ActiveRecord::Base
   end
   delegate :location, to: :landmark, allow_nil: true
 
+  def formatted_timestamp
+    return "unknown" if captured_at.blank?
+    options = {year: captured_at.year, scope: :formatted_timestamp}
+    if approximate_date?
+      I18n.t :approximate, options
+    else
+      I18n.t :specific, options
+    end
+  end
+
 end

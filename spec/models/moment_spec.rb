@@ -66,4 +66,23 @@ describe Moment do
     subject.should have(0).errors_on(:image)
   end
 
+  context 'the formatted timestamp' do
+
+    it 'shold be unknown without a date' do
+      moment = Moment.new captured_at: nil
+      moment.formatted_timestamp.should == "unknown"
+    end
+
+    it 'should return circa dates correctly' do
+      moment = Moment.new captured_at: Date.new(1943), approximate_date: true
+      moment.formatted_timestamp.should == "ca. 1943"
+    end
+
+    it 'should return specific years correctly' do
+      moment = Moment.new captured_at: Date.new(1943), approximate_date: false
+      moment.formatted_timestamp.should == "1943"
+    end
+
+  end
+
 end

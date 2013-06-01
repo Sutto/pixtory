@@ -14,7 +14,16 @@ describe MomentSerializer do
   after { test_image.close }
 
   let(:landmark) { Landmark.new location: "Test Location" }
-  let(:moment)   { Moment.create! landmark: landmark, caption: "This is a Test Caption", image: test_image }
+  let(:moment) do
+    Moment.create!({
+      landmark:         landmark,
+      caption:          "This is a Test Caption",
+      image:            test_image,
+      captured_at:      Date.new(2000),
+      approximate_date: false,
+      source_url:       "http://example.com/test"
+    })
+  end
 
   subject { described_class.new(moment).serializable_hash }
 
@@ -44,6 +53,16 @@ describe MomentSerializer do
   it 'should include the caption' do
     subject[:caption].should be_present
     subject[:caption].should == moment.caption
+  end
+
+  it 'should include the formatted timestamp' do
+    subject[:formatted_timestamp].should be_present
+    subject[:formatted_timestamp].should == moment.formatted_timestamp
+  end
+
+  it 'should include the source url' do
+    subject[:source_url].should be_present
+    subject[:source_url].should == moment.source_url
   end
 
   it 'should include the landmark' do
