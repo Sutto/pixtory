@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130531151208) do
+ActiveRecord::Schema.define(version: 20130601023408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,20 +30,23 @@ ActiveRecord::Schema.define(version: 20130531151208) do
   add_index "landmarks", ["coordinates"], :name => "index_landmarks_on_coordinates", :spatial => true
 
   create_table "moments", force: true do |t|
-    t.string   "image",                            null: false
+    t.string   "image",                               null: false
     t.integer  "width"
     t.integer  "height"
-    t.text     "caption",                          null: false
-    t.integer  "landmark_id",                      null: false
+    t.text     "caption",                             null: false
+    t.integer  "landmark_id",                         null: false
     t.date     "captured_at"
-    t.boolean  "approximate_date", default: false
+    t.boolean  "approximate_date",    default: false
     t.string   "source_url"
     t.string   "source_name"
     t.string   "license"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "external_key"
+    t.string   "external_identifier"
   end
 
+  add_index "moments", ["external_key", "external_identifier"], :name => "index_moments_on_external_key_and_external_identifier", :unique => true
   add_index "moments", ["landmark_id"], :name => "index_moments_on_landmark_id"
 
   create_table "people", force: true do |t|
