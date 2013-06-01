@@ -28,6 +28,8 @@ gem 'fog'
 gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
 gem 'mini_magick'
 
+gem 'bugsnag', require: nil
+
 group :doc do
   gem 'sdoc', require: false
 end
