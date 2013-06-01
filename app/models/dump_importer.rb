@@ -26,14 +26,14 @@ class DumpImporter
 
   def import
     each_row do |row|
-      next if row["Picture URL"].blank?
+      next if row["Picture URL"].blank? or row['Geo'].blank? or row["Address"].blank?
       begin
         item = Moment.from_source(:csv, row['UID'])
         item.attributes = {
           remote_image_url: row['Picture URL'],
           caption:          row['Caption'],
           location:         row['Address'],
-          coordinates:      row['Geo'].split(",")
+          coordinates:      row['Geo'].split(","),
           source_url:       row['Source of Picture'],
           captured_at:      Date.new(*row['Date'].split("/").map(&:to_i).reverse),
           approximate_date: (row['Circa'].to_s.downcase.strip == 'y')

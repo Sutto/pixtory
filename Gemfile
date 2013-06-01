@@ -22,6 +22,8 @@ gem 'net-http-persistent'
 
 gem 'addressable'
 
+gem 'will_paginate'
+
 gem 'fog'
 gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
 gem 'mini_magick'

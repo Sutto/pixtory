@@ -11,15 +11,11 @@ class Moment < ActiveRecord::Base
   end
 
   def self.near(lat, lng, distance = 1000)
-    closest(lat, lng).where "ST_DWithin(moments.coordinates, ST_Geomfromtext(ST_MakePoint(#{lng.to_f}, #{lat.to_f}), #{distance.to_f})"
+    closest(lat, lng).where "ST_DWithin(moments.coordinates, ST_MakePoint(#{lng.to_f}, #{lat.to_f}), #{distance.to_f})"
   end
 
   def self.closest(lat, lng)
     order "ST_Distance(moments.coordinates, ST_MakePoint(#{lng.to_f}, #{lat.to_f})) ASC"
-  end
-
-  def self.preloaded
-    includes :landmark
   end
 
   def coordinates=(pair)
