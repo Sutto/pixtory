@@ -4,7 +4,6 @@ ruby '2.0.0'
 
 gem 'rails', '4.0.0.rc1'
 gem 'pg'
-gem 'rails_config'
 
 gem 'activerecord-postgis-adapter'
 
@@ -21,7 +20,6 @@ gem 'pry-rails'
 gem 'faraday'
 gem 'net-http-persistent'
 
-gem 'google_maps_geocoder'
 gem 'addressable'
 
 gem 'fog'

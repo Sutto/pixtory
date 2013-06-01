@@ -5,10 +5,10 @@ class CreateMoments < ActiveRecord::Migration
       t.integer :width
       t.integer :height
       t.text :caption, null: false
-      t.belongs_to :landmark, index: true, null: false
+      t.text :location, null: false
       t.date :captured_at
       t.boolean :approximate_date, default: false
-      t.string :source_url
+      t.text :source_url
       t.string :source_name
       t.string :license
       t.timestamps

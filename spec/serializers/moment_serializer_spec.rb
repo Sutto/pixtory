@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe MomentSerializer do
 
-  before do
-    stub(Landmark).geocode.with_any_args { {city: "Perth", suburb: "Jolimont", street: "Currie St", coordinates: "POINT(5 10)"} }
-  end
-
   let(:test_image) do
     path = Rails.root.join('spec', 'fixtures', 'test.jpg')
     File.open(path, 'rb')
@@ -13,10 +9,10 @@ describe MomentSerializer do
 
   after { test_image.close }
 
-  let(:landmark) { Landmark.new location: "Test Location" }
   let(:moment) do
     Moment.create!({
-      landmark:         landmark,
+      location:         "Perth, Australia",
+      coordinates:      [25.0, 20.0],
       caption:          "This is a Test Caption",
       image:            test_image,
       captured_at:      Date.new(2000),
@@ -26,6 +22,14 @@ describe MomentSerializer do
   end
 
   subject { described_class.new(moment).serializable_hash }
+
+  it 'should have the location' do
+    subject[:location].should == {
+      name: moment.location,
+      lat:  25.0,
+      lng:  20.0
+    }
+  end
 
   it 'should have the id' do
     subject[:id].should be_present
@@ -63,11 +67,6 @@ describe MomentSerializer do
   it 'should include the source url' do
     subject[:source_url].should be_present
     subject[:source_url].should == moment.source_url
-  end
-
-  it 'should include the landmark' do
-    subject[:landmark].should be_present
-    subject[:landmark].should == LandmarkSerializer.new(landmark).serializable_hash
   end
 
 end

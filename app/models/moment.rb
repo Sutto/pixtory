@@ -2,8 +2,7 @@ class Moment < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  belongs_to :landmark
-  validates :image, :caption, :landmark,  presence: true
+  validates :image, :caption, :location, :coordinates, presence: true
   # validates :image, integrity: true, processing: true
 
   def self.from_source(name, value)
@@ -11,14 +10,24 @@ class Moment < ActiveRecord::Base
     scope.first || scope.build
   end
 
+  def self.near(lat, lng, distance = 1000)
+    closest(lat, lng).where "ST_DWithin(moments.coordinates, ST_Geomfromtext(ST_MakePoint(#{lng.to_f}, #{lat.to_f}), #{distance.to_f})"
+  end
+
+  def self.closest(lat, lng)
+    order "ST_Distance(moments.coordinates, ST_MakePoint(#{lng.to_f}, #{lat.to_f})) ASC"
+  end
+
   def self.preloaded
     includes :landmark
   end
 
-  def location=(value)
-    self.landmark = (value.presence && Landmark.from_location(value))
+  def coordinates=(pair)
+    if pair.is_a?(Array)
+      pair = "POINT(#{pair[1].to_f} #{pair[0].to_f})"
+    end
+    write_attribute :coordinates, pair.presence
   end
-  delegate :location, to: :landmark, allow_nil: true
 
   def formatted_timestamp
     return "unknown" if captured_at.blank?

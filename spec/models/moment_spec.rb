@@ -2,17 +2,6 @@ require 'spec_helper'
 
 describe Moment do
 
-  before do
-    stub(Landmark).geocode(anything) {{
-      city:        'Perth',
-      coordinates: 'POINT(10 20)',
-      street:      'Test Street',
-      suburb:      'Perth'
-    }}
-  end
-
-  let(:landmark) { Landmark.create! location: 'Test Landmark' }
-
   let(:test_image) do
     path = Rails.root.join('spec', 'fixtures', 'test.jpg')
     File.open(path, 'rb')
@@ -21,31 +10,14 @@ describe Moment do
   after { test_image.close }
 
   subject do
-    Moment.new image: test_image, location: 'Test Location', caption: 'This is a pretty picture'
+    Moment.new image: test_image, location: 'Test Location', caption: 'This is a pretty picture', coordinates: [20, 10]
   end
 
-  it 'should automatically set landmark from location' do
-    subject.location = nil
-    subject.landmark.should be_nil
-    mock(Landmark).from_location("Test Place") { landmark }
-    subject.location = "Test Place"
-    subject.landmark.should == landmark
-  end
-
-  it 'should get location from landmark' do
-    subject.landmark = nil
-    subject.location.should be_nil
-    subject.landmark = landmark
-    subject.location.should == landmark.location
-  end
-
-  it 'should require a landmark' do
-    subject.landmark = nil
-    subject.should_not be_valid
-    subject.should have_at_least(1).errors_on(:landmark)
-    subject.landmark = landmark
-    subject.valid?
-    subject.should have(0).errors_on(:landmark)
+  it 'should set coordinates from long / lat pair' do
+    subject.coordinates = [45, 65]
+    subject.coordinates.should be_present
+    subject.coordinates.lon.should be_within(0.001).of(65)
+    subject.coordinates.lat.should be_within(0.001).of(45)
   end
 
   it 'should require a caption' do
@@ -55,6 +27,24 @@ describe Moment do
     subject.caption = 'Test Caption'
     subject.valid?
     subject.should have(0).errors_on(:caption)
+  end
+
+  it 'should require a location' do
+    subject.location = nil
+    subject.should_not be_valid
+    subject.should have_at_least(1).errors_on(:location)
+    subject.location = 'Test Location'
+    subject.valid?
+    subject.should have(0).errors_on(:location)
+  end
+
+  it 'should require a coordinates' do
+    subject.coordinates = nil
+    subject.should_not be_valid
+    subject.should have_at_least(1).errors_on(:coordinates)
+    subject.coordinates = [10, 10]
+    subject.valid?
+    subject.should have(0).errors_on(:coordinates)
   end
 
   it 'should require an image' do
