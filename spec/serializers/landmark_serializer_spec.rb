@@ -12,7 +12,7 @@ describe LandmarkSerializer do
 
   it 'should have the id' do
     subject[:id].should be_present
-    subject[:id].should == person.id
+    subject[:id].should == landmark.id
   end
 
   it 'should serialize the basic attributes' do
