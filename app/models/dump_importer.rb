@@ -35,7 +35,7 @@ class DumpImporter
           location:         row['Address'],
           coordinates:      row['Geo'].split(",")
           source_url:       row['Source of Picture'],
-          captured_at:      Date.new(row['Date'].to_i),
+          captured_at:      Date.new(*row['Date'].split("/").map(&:to_i).reverse),
           approximate_date: (row['Circa'].to_s.downcase.strip == 'y')
         }
         item.save!
