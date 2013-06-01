@@ -1,0 +1,6 @@
+language: ruby
+before_install: ./.travis/before_install.sh
+before_script: ./.travis/before_script.sh
+script: bundle exec rake
+rvm:
+  - 2.0.0
