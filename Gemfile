@@ -9,6 +9,7 @@ gem 'rails_config'
 gem 'activerecord-postgis-adapter'
 
 gem 'unicorn'
+gem 'foreman'
 
 gem 'awesome_print', require: nil
 gem 'oj'
