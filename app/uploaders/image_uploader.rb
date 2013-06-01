@@ -8,7 +8,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :primary do
     process normalize_uploaded_image: 90
-    process resize_to_fill: [1000, 1000]
+    process resize_to_fill: [600, 600]
   end
 
   version :thumb do
