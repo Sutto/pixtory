@@ -5,14 +5,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   process :set_content_type
-  process normalize_uploaded_image: 90
 
-  version :main do
-    process resize_to_fill: [1024, 1024]
+  version :primary do
+    process normalize_uploaded_image: 90
+    process resize_to_fill: [1000, 1000]
   end
 
   version :thumb do
-    process resize_to_fill: [600, 600]
+    process normalize_uploaded_image: 90
+    process resize_to_fill: [300, 300]
   end
 
   def store_dir

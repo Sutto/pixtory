@@ -13,7 +13,12 @@ describe Moment do
 
   let(:landmark) { Landmark.create! location: 'Test Landmark' }
 
-  let(:test_image) { nil }
+  let(:test_image) do
+    path = Rails.root.join('spec', 'fixtures', 'test.jpg')
+    File.open(path, 'rb')
+  end
+
+  after { test_image.close }
 
   subject do
     Moment.new image: test_image, location: 'Test Location', caption: 'This is a pretty picture'
@@ -53,7 +58,7 @@ describe Moment do
   end
 
   it 'should require an image' do
-    subject.image = nil
+    subject.remove_image!
     subject.should_not be_valid
     subject.should have_at_least(1).errors_on(:image)
     subject.image = test_image
