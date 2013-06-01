@@ -6,9 +6,14 @@ describe LandmarkSerializer do
     stub(Landmark).geocode.with_any_args { {city: "Perth", suburb: "Jolimont", street: "Currie St", coordinates: "POINT(5 10)"} }
   end
 
-  let(:landmark) { Landmark.new location: "Test Location" }
+  let(:landmark) { Landmark.create! location: "Test Location" }
 
-  subject { LandmarkSerializer.new(landmark).serializable_hash }
+  subject { described_class.new(landmark).serializable_hash }
+
+  it 'should have the id' do
+    subject[:id].should be_present
+    subject[:id].should == person.id
+  end
 
   it 'should serialize the basic attributes' do
     subject[:location].should == landmark.location

@@ -6,6 +6,10 @@ class Moment < ActiveRecord::Base
   validates :image, :caption, :landmark,  presence: true
   validates :image, integrity: true, processing: true
 
+  def self.preloaded
+    includes :landmark
+  end
+
   def location=(value)
     self.landmark = (value.presence && Landmark.from_location(value))
   end

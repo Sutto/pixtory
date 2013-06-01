@@ -6,19 +6,28 @@ describe PersonSerializer do
     Person.create! name: "Test Name", avatar: "http://placekitten.com/300/300", push_token: SecureRandom.hex(32), location: "Perth, Australia"
   end
 
+  let(:serializaiton_options) { {} }
+
+  subject { described_class.new(person, serializaiton_options).serializable_hash }
+
   it 'should include the base details' do
-    serialized = PersonSerializer.new(person).serializable_hash
-    serialized[:name].should   == person.name
-    serialized[:avatar].should == person.avatar
-    serialized[:location].should == person.location
+    subject[:name].should   == person.name
+    subject[:avatar].should == person.avatar
+    subject[:location].should == person.location
+  end
+
+  it 'should have the id' do
+    subject[:id].should be_present
+    subject[:id].should == person.id
   end
 
   context 'as personal' do
 
+    before { serializaiton_options[:personal] = true }
+
     it 'should include the tokens' do
-      serialized = PersonSerializer.new(person, personal: true).serializable_hash
-      serialized[:push_token].should be_present
-      serialized[:authentication_token].should be_present
+      subject[:push_token].should be_present
+      subject[:authentication_token].should be_present
     end
 
   end
