@@ -13,15 +13,14 @@ describe MomentsController do
 
   describe 'index' do
 
-    it 'should work' do
+    it 'should work with non random' do
       get :index, lat: 20, lng: 10
       response.should be_successful
     end
 
-    it 'should work' do
+    it 'should work with random' do
       get :index
       response.should be_successful
-      puts response.body
     end
 
   end

@@ -18,7 +18,7 @@ class MomentsController < ApplicationController
       moments = Moment.random
       random = true
     end
-    render json: moments.page(params[:page]).per_page(25), metadata: {random: random}
+    render json: moments.page(params[:page]).per_page(25), meta: {random: random}
   end
 
 end
