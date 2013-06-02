@@ -1,6 +1,6 @@
 class MomentSerializer < ActiveModel::Serializer
 
-  attributes :id, :caption, :image, :formatted_timestamp, :source_url, :location
+  attributes :id, :caption, :image, :formatted_timestamp, :source_url, :location, :description
 
   def image
     {

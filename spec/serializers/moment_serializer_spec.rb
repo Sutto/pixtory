@@ -17,7 +17,8 @@ describe MomentSerializer do
       image:            test_image,
       captured_at:      Date.new(2000),
       approximate_date: false,
-      source_url:       "http://example.com/test"
+      source_url:       "http://example.com/test",
+      description:      "TEST"
     })
   end
 

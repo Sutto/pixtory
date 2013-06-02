@@ -31,12 +31,14 @@ class DumpImporter
         item = Moment.from_source(:csv, row['UID'])
         item.attributes = {
           remote_image_url: row['Picture URL'],
+          source_image_url: row['Picture URL']
           caption:          row['Caption'],
           location:         row['Address'],
           coordinates:      row['Geo'].split(","),
           source_url:       row['Source of Picture'],
           captured_at:      Date.new(*row['Date'].split("/").map(&:to_i).reverse),
-          approximate_date: (row['Circa'].to_s.downcase.strip == 'y')
+          approximate_date: (row['Circa'].to_s.downcase.strip == 'y'),
+          description:      row['Description']
         }
         item.save!
       rescue => e

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130601074500) do
+ActiveRecord::Schema.define(version: 20130602020733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20130601074500) do
     t.string   "external_key"
     t.string   "external_identifier"
     t.spatial  "coordinates",         limit: {:srid=>4326, :type=>"point", :geographic=>true},                 null: false
+    t.text     "description"
+    t.text     "source_image_url"
   end
 
   add_index "moments", ["coordinates"], :name => "index_moments_on_coordinates", :spatial => true
