@@ -1,7 +1,7 @@
 class MomentsController < ApplicationController
 
   def show
-    moment = Moment.preloaded.find(params[:id])
+    moment = Moment.find(params[:id])
     render json: moment
   end
 
