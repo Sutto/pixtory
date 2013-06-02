@@ -31,7 +31,7 @@ class DumpImporter
         item = Moment.from_source(:csv, row['UID'])
         item.attributes = {
           remote_image_url: row['Picture URL'],
-          source_image_url: row['Picture URL']
+          source_image_url: row['Picture URL'],
           caption:          row['Caption'],
           location:         row['Address'],
           coordinates:      row['Geo'].split(","),
