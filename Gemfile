@@ -31,6 +31,8 @@ gem 'mini_magick'
 gem 'bugsnag'
 gem 'newrelic_rpm'
 
+gem 'rack-jsonp'
+
 group :doc do
   gem 'sdoc', require: false
 end
