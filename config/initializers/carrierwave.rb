@@ -10,6 +10,9 @@ CarrierWave.configure do |config|
     config.fog_directory  = ENV['S3_BUCKET_KEY']
     config.fog_public     = true
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
+    if (cf_host = ENV['CLOUDFRONT_HOST']).present?
+      config.asset_host = cf_host
+    end
   else
     config.storage = :file
   end
