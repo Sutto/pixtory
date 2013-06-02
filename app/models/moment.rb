@@ -10,6 +10,10 @@ class Moment < ActiveRecord::Base
     scope.first || scope.build
   end
 
+  def self.random
+    order("random() ASC")
+  end
+
   def self.near(lat, lng, distance = 1000)
     closest(lat, lng).where "ST_DWithin(moments.coordinates, ST_MakePoint(#{lng.to_f}, #{lat.to_f}), #{distance.to_f})"
   end

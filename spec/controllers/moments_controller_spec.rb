@@ -18,6 +18,12 @@ describe MomentsController do
       response.should be_successful
     end
 
+    it 'should work' do
+      get :index
+      response.should be_successful
+      puts response.body
+    end
+
   end
 
   describe 'show' do
