@@ -22,7 +22,7 @@ rails runner 'DumpImporter.import! "data/dump.csv"'
 
 ## Manual Data
 
-The data in `data/dump.csv` is pulled from our initial data set on [Google Docs](https://docs.google.com/spreadsheet/ccc?key=0AjnwWreDoXUKdDRDakRfQmRuVEQ0Rlo3M2F1ci1oUWc#gid=0), pulled from the State Library of WA.
+The data in `data/dump.csv` is pulled from our initial data set on [Google Docs](https://docs.google.com/spreadsheet/pub?key=0AjnwWreDoXUKdDRDakRfQmRuVEQ0Rlo3M2F1ci1oUWc&output=html), pulled from the State Library of WA.
 
 This data is licensed under [Creative Commons BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/au/).
 
