@@ -10,17 +10,29 @@ class DumpImporter
     end
   end
 
-  attr_reader :file
+  def self.import_url!(url)
+    reader = open(url)
+    new(reader).import
+  ensure
+    reader.close
+  end
 
-  def initialize(file)
-    @file = file
+  def self.auto_import!
+    if (key = ENV['SPREADSHEET_KEY']).present?
+      url = "https://spreadsheets.google.com/pub?key=#{key}&output=csv"
+      import_url! url
+    end
+  end
+
+  attr_reader :io
+
+  def initialize(io)
+    @io = io
   end
 
   def each_row
-    CSV.open(file, headers: true) do |csv|
-      csv.each do |row|
-        yield row if block_given?
-      end
+    CSV.open io, headers: true do |csv|
+      csv.each { |row| yield row }
     end
   end
 
@@ -28,6 +40,7 @@ class DumpImporter
     each_row do |row|
       next if row["Picture URL"].blank? or row['Geo'].blank? or row["Address"].blank?
       begin
+        puts "Importing row: #{row['UID']}"
         item = Moment.from_source(:csv, row['UID'])
         item.attributes = {
           source_image_url: row['Picture URL'],

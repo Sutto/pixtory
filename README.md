@@ -1,7 +1,7 @@
 # Pixtory [![Build Status](https://travis-ci.org/Sutto/pixtory.png)](https://travis-ci.org/Sutto/pixtory)
 
 
-This provides the pixtory API used in the the Pixtory iOS app.
+This provides the pixtory API used in the the [Pixtory iOS app](https://github.com/Sutto/pixtory-ios).
 
 See [ourpixtory.com](http://ourpixtory.com/) for more information.
 
@@ -29,3 +29,5 @@ This data is licensed under [Creative Commons BY-NC-SA](http://creativecommons.o
 ## Code
 
 All code for Pixtory is released under the MIT License. Please see `LICENSE` in this repository.
+
+Copyright the Pixtory Team, 2013.
