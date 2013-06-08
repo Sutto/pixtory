@@ -5,6 +5,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   process :set_content_type
+  process :store_geometry
 
   version :primary do
     process normalize_uploaded_image: 90
@@ -28,6 +29,14 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def filename
      @name ||= "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  def store_geometry
+    if file && model
+      image        = MiniMagick::Image.open file.file
+      model.width  = image[:width]
+      model.height = image[:height]
+    end
   end
 
   protected
