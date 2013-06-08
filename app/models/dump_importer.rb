@@ -54,7 +54,7 @@ class DumpImporter
           license:          "cc by-nc-sa 3.0",
           source_name:      "State Library of Western Australia"
         }
-        if item.image.blank? || item.source_image_url.changed?
+        if item.image.blank? || item.source_image_url_changed?
           item.remote_image_url = row['Picture URL']
         end
         item.save!
