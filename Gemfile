@@ -27,6 +27,7 @@ gem 'will_paginate'
 gem 'fog'
 gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
 gem 'mini_magick'
+gem 'fastimage', require: nil
 
 gem 'bugsnag'
 gem 'newrelic_rpm'
