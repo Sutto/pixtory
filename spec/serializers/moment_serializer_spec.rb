@@ -15,6 +15,8 @@ describe MomentSerializer do
       coordinates:      [25.0, 20.0],
       caption:          "This is a Test Caption",
       image:            test_image,
+      width:            100,
+      height:           200,
       captured_at:      Date.new(2000),
       approximate_date: false,
       source_url:       "http://example.com/test",
@@ -41,18 +43,24 @@ describe MomentSerializer do
     subject[:image].should be_present
     subject[:image][:full].should be_present
     subject[:image][:full][:url].should be_present
+    subject[:image][:full][:width].should be_present
+    subject[:image][:full][:height].should be_present
   end
 
   it 'should include primary image details' do
     subject[:image].should be_present
     subject[:image][:primary].should be_present
     subject[:image][:primary][:url].should be_present
+    subject[:image][:primary][:width].should be_present
+    subject[:image][:primary][:height].should be_present
   end
 
   it 'should include thumb image details' do
     subject[:image].should be_present
     subject[:image][:thumb].should be_present
     subject[:image][:thumb][:url].should be_present
+    subject[:image][:full][:width].should be_present
+    subject[:image][:full][:height].should be_present
   end
 
   it 'should include the caption' do
