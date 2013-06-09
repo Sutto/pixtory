@@ -2,5 +2,6 @@ Pixtory::Application.routes.draw do
   root to: 'root#index'
   resources :moments, only: [:index, :show]
 
-  get 'explore', to: 'web/moments#index'
+  get 'explore',     to: 'web/moments#index', as: :explore
+  get 'explore/:id', to: 'web/moments#show',  as: :explore_moment
 end

@@ -2,91 +2,100 @@
   padding: 20px 30px;
   text-align: center;
   margin: 0 auto;
+}
 
+#single-moment {
+  text-align: center;
   .moment {
-    padding: 10px;
-    background: #FFF;
+    margin: 20px auto;
     display: inline-block;
-    margin: 10px;
+    .moment-inner { display: none; }
+    .moment-full { display: block; }
+  }
+}
 
-    &:hover {
-      background: #FFFDE8;
-      cursor: pointer;
+.moment {
+  padding: 10px;
+  background: #FFF;
+  display: inline-block;
+  margin: 10px;
+
+  #moments &:hover {
+    background: #FFFDE8;
+    cursor: pointer;
+  }
+
+  box-shadow: 1px 1px 1px #999;
+
+  &.expanded {
+    .moment-full { display: block; }
+    .moment-inner { display: none; }
+  }
+
+
+  h2 {
+    margin: 0;
+    padding: 5px 0 0;
+    display: block;
+    overflow: hidden;
+
+    .location {
+      font-weight: bold;
+      color: #333;
+      float: left;
+      display: inline-block;
+      max-width: 80%;
+      text-align: left;
     }
 
-    box-shadow: 1px 1px 1px #999;
-
-    &.expanded {
-      .moment-full { display: block; }
-      .moment-inner { display: none; }
+    .timestamp {
+      color: #999;
+      text-align: right;
+      float: right;
+      display: inline-block;
+      font-weight: normal;
     }
 
+  }
+
+  .moment-full {
+    display: none;
+    z-index: 100;
 
     h2 {
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    p.caption {
+      border-top: 1px solid #CCC;
+      padding: 5px 0;
+      margin: 10px 0 0;
+      text-align: left;
+      font-size: 16px;
+      line-height: 20px;
+      color: #111;
+    }
+
+    p.description {
+      border-top: 1px solid #CCC;
+      padding: 10px 0 0;
       margin: 0;
-      padding: 5px 0 0;
-      display: block;
-      overflow: hidden;
-
-      .location {
-        font-weight: bold;
-        color: #333;
-        float: left;
-        display: inline-block;
-        max-width: 80%;
-        text-align: left;
-      }
-
-      .timestamp {
-        color: #999;
-        text-align: right;
-        float: right;
-        display: inline-block;
-        font-weight: normal;
-      }
-
+      text-align: left;
+      font-size: 12px;
+      line-height: 18px;
+      color: #666;
     }
 
-    .moment-full {
-      display: none;
-      z-index: 100;
+  }
 
-      h2 {
-        font-size: 16px;
-        margin-top: 5px;
-      }
+  .moment-inner {
 
-      p.caption {
-        border-top: 1px solid #CCC;
-        padding: 5px 0;
-        margin: 10px 0 0;
-        text-align: left;
-        font-size: 16px;
-        line-height: 20px;
-        color: #111;
-      }
-
-      p.description {
-        border-top: 1px solid #CCC;
-        padding: 10px 0 0;
-        margin: 0;
-        text-align: left;
-        font-size: 12px;
-        line-height: 18px;
-        color: #666;
-      }
-
+    .image-container {
+      background-size: 100%;
     }
 
-    .moment-inner {
-
-      .image-container {
-        background-size: 100%;
-      }
-
-      h2 { font-size: 12px; }
-
-    }
+    h2 { font-size: 12px; }
 
   }
 

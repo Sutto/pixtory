@@ -4,4 +4,8 @@ class Web::MomentsController < ApplicationController
     @moments = Moment.all
   end
 
+  def show
+    @moment = Moment.find(params[:id])
+  end
+
 end
