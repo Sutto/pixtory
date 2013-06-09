@@ -4,17 +4,48 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::UploadedImageProcessing
   include CarrierWave::MimeTypes
 
+  SIZES = {
+    primary:   [600, 600],
+    thumb:     [300, 300],
+    grid_base: [180, :relative],
+    grid_full: [400, :relative]
+  }
+
+  def self.size_for(width, height, name)
+    if name == :primary
+      return [width, height]
+    else
+      w, h = SIZES[name]
+      if w == :relative
+        w = (h.to_f / height) * width
+      elsif h == :relative
+        h = (w.to_f / width) * height
+      end
+      return [w, h]
+    end
+  end
+
   process :set_content_type
   process :store_geometry
 
   version :primary do
     process normalize_uploaded_image: 90
-    process resize_to_fill: [600, 600]
+    process resize_to_fill: SIZES[:primary]
+  end
+
+  version :grid_base do
+    process normalize_uploaded_image: 90
+    process resize_to_width: SIZES[:grid_base].first
+  end
+
+  version :grid_full do
+    process normalize_uploaded_image: 90
+    process resize_to_width: SIZES[:grid_full].first
   end
 
   version :thumb do
     process normalize_uploaded_image: 90
-    process resize_to_fill: [300, 300]
+    process resize_to_fill: SIZES[:thumb]
   end
 
   def store_dir
@@ -28,7 +59,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Random filename code from the Carrierwave wiki... of doom!
 
   def filename
-     @name ||= "#{secure_token}.#{file.extension}" if original_filename.present?
+     @name ||= "image.#{file.extension}" if original_filename.present?
   end
 
   def store_geometry
@@ -37,13 +68,6 @@ class ImageUploader < CarrierWave::Uploader::Base
       model.width  = image[:width]
       model.height = image[:height]
     end
-  end
-
-  protected
-
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
 
 end

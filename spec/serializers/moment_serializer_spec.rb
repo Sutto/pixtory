@@ -59,8 +59,8 @@ describe MomentSerializer do
     subject[:image].should be_present
     subject[:image][:thumb].should be_present
     subject[:image][:thumb][:url].should be_present
-    subject[:image][:full][:width].should be_present
-    subject[:image][:full][:height].should be_present
+    subject[:image][:thumb][:width].should be_present
+    subject[:image][:thumb][:height].should be_present
   end
 
   it 'should include the caption' do

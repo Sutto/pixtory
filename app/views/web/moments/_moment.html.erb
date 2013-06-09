@@ -1,0 +1,28 @@
+<%
+  width, height           = moment.image_size :grid_base
+  full_width, full_height = moment.image_size :grid_full
+%>
+<div class='moment'>
+  <div class='moment-inner' style="width: <%= width %>px">
+    <div class='image-container'>
+      <%= image_tag moment.image.url(:grid_base), width: width, height: height %>
+    </div>
+    <h2>
+      <span class='location'><%= moment.location %></span>
+      <span class='timestamp'><%= moment.formatted_timestamp %></span>
+    </h2>
+  </div>
+  <div class='moment-full' style='width: <%= full_width %>px'>
+    <div class='image-container'>
+      <%= image_tag moment.image.url(:grid_full), width: full_width, height: full_height %>
+    </div>
+    <div class='about'>
+      <h2>
+        <span class='location'><%= moment.location %></span>
+        <span class='timestamp'><%= moment.formatted_timestamp %></span>
+      </h2>
+      <p class='caption'><%= moment.caption %></p>
+      <p class='description'><%= moment.description %></p>
+    </div>
+  </div>
+</div>

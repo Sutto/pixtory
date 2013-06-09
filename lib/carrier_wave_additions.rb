@@ -17,5 +17,13 @@ module CarrierWave
       end
     end
 
+    def resize_to_width(width)
+      manipulate! do |img|
+        img.resize "#{width}x"
+        img = yield(img) if block_given?
+        img
+      end
+    end
+
   end
 end

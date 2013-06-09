@@ -2,11 +2,15 @@
 <html>
 <head>
   <title>Pixtory</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <header id='page-header'>
+    <%= link_to 'Pixtory', '#', id: 'logo' %>
+  </header>
 
 <%= yield %>
 
