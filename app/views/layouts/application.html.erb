@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pixtory</title>
+  <title><%= @page_title ||= "Explore our pixtory." %> - Pixtory</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -16,7 +16,7 @@
   <%= yield %>
 
   <footer id='page-footer'>
-    <p>Brought to you courtesy of <%= link_to 'Team Pixtory', '#' %>, 2013.</p>
+    <p>Brought to you courtesy of <%= link_to 'Team Pixtory', team_url %>, 2013.</p>
     <p>All content on this site is owned by it's respective owners and, unless
     otherwise noted, released under <%= link_to "CC 3.0 BY-NC-SA", "http://creativecommons.org/licenses/by-nc-sa/3.0/au/" %>.</p>
   </footer>

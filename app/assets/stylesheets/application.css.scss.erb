@@ -49,3 +49,78 @@ a {
   color: #666;
   &:hover, &:active { color: black; }
 }
+
+#content {
+  width: 460px;
+  box-shadow: 1px 1px 1px #999;
+  background: #FFF;
+  padding: 10px;
+  margin: 20px auto;
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.8em;
+    margin: 0 0 10px;
+  }
+
+  dl {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    dt {
+      margin: 0 0 5px;;
+      font-size: 12px;
+      font-weight: bold;
+      color: #000;
+      padding: 0;
+      vertical-align: middle;
+    }
+
+    dd {
+      margin: 0 0 10px;
+      color: #444;
+      padding: 0;
+    }
+
+  }
+
+}
+
+#team-image {
+  width: 460px;
+  height: 307px;
+  position: relative;
+  background: none;
+  margin: 0 0 10px;
+
+  .shadow {
+    box-shadow: inset  1px 1px 10px #000;
+    width: 460px;
+    height: 307px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  img {
+    width: 460px;
+    height: 307px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+}

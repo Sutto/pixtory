@@ -1,0 +1,2 @@
+module Web::TeamHelper
+end
