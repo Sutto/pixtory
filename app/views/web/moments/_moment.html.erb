@@ -23,6 +23,10 @@
       </h2>
       <p class='caption'><%= moment.caption %></p>
       <p class='description'><%= moment.description %></p>
+      <p class='source'>
+        Image used under <span class='license'><%= moment.license %>, courtesy of
+        <%= link_to moment.source_name, moment.source_url, class: 'source-url' %>.
+      </p>
     </div>
   </div>
 </div>
