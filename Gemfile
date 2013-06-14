@@ -29,6 +29,8 @@ gem 'carrierwave', require: %w(carrierwave carrierwave/orm/activerecord)
 gem 'mini_magick'
 gem 'fastimage', require: nil
 
+gem 'nokogiri'
+
 gem 'bugsnag'
 gem 'newrelic_rpm'
 
