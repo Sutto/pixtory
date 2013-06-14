@@ -78,4 +78,60 @@ describe MomentSerializer do
     subject[:source_url].should == moment.source_url
   end
 
+  context 'links' do
+
+
+    it 'should have no links without a controller' do
+      subject.should have_key :links
+      subject[:links].should == []
+    end
+
+    context 'with a controller' do
+
+      let(:controller) do
+        o = Object.new
+        stub(o).explore_moment_url(anything) { |m| "moment=#{m.to_param}" }
+        stub(o).moment_url.with_any_args do |*args|
+          options = args.extract_options!
+          moment = args.shift
+          "#{moment.to_param}?#{options.to_param}"
+        end
+        o
+      end
+
+      subject { described_class.new(moment, controller: controller).serializable_hash }
+
+      it 'should have links' do
+        subject[:links].should be_present
+        subject[:links].should be_a Array
+      end
+
+      it 'should have a link to the web version' do
+        link = subject[:links].detect { |l| l[:rel] == 'web' }
+        link.should be_present
+        link[:href].should == "moment=#{moment.to_param}"
+      end
+
+      it 'should have a link to the current version' do
+        link = subject[:links].detect { |l| l[:rel] == 'self' }
+        link.should be_present
+        link[:href].should == "#{moment.to_param}?format=json"
+      end
+
+      it 'should have a link to the geojson version' do
+        link = subject[:links].detect { |l| l[:rel] == 'geojson' }
+        link.should be_present
+        link[:href].should == "#{moment.to_param}?format=geojson"
+      end
+
+      it 'should have a link to the kml' do
+        link = subject[:links].detect { |l| l[:rel] == 'kml' }
+        link.should be_present
+        link[:href].should == "#{moment.to_param}?format=kml"
+      end
+
+    end
+
+  end
+
 end
