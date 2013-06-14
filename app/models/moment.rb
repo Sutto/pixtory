@@ -29,6 +29,14 @@ class Moment < ActiveRecord::Base
     write_attribute :coordinates, pair.presence
   end
 
+  def title
+    "#{location} - #{formatted_timestamp}"
+  end
+
+  def to_param
+    id.presence && "#{id}-#{title.parameterize}"
+  end
+
   def formatted_timestamp
     return "unknown" if captured_at.blank?
     options = {year: captured_at.year, scope: :formatted_timestamp}

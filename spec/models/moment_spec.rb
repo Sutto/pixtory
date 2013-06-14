@@ -60,6 +60,22 @@ describe Moment do
 
   end
 
+  context 'the title' do
+
+    it 'should include the location in the title' do
+      subject.title.should be_present
+      subject.location.should be_present
+      subject.title.should include subject.location
+    end
+
+    it 'should include the formatted timestamp in the title' do
+      subject.title.should be_present
+      subject.formatted_timestamp.should be_present
+      subject.title.should include subject.formatted_timestamp
+    end
+
+  end
+
   context 'the formatted timestamp' do
 
     it 'shold be unknown without a date' do
