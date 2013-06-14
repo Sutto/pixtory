@@ -13,23 +13,70 @@ describe MomentsController do
 
   describe 'index' do
 
-    it 'should work with non random' do
-      get :index, lat: 20, lng: 10
-      response.should be_successful
+    context 'scoped by location' do
+
+      it 'should work with json' do
+        get :index, format: 'json', lat: 20, lng: 10
+        response.should be_successful
+        response.content_type.should == 'application/json'
+      end
+
+      it 'should work with geojson' do
+        get :index, format: 'geojson', lat: 20, lng: 10
+        response.should be_successful
+        response.content_type.should == 'application/json'
+      end
+
+      it 'should work with kml' do
+        get :index, format: 'kml', lat: 20, lng: 10
+        response.should be_successful
+        response.content_type.should == 'application/vnd.google-earth.kml+xml'
+      end
+
     end
 
-    it 'should work with random' do
-      get :index
-      response.should be_successful
+    context 'with the default scope' do
+
+      it 'should work with json' do
+        get :index, format: 'json'
+        response.should be_successful
+        response.content_type.should == 'application/json'
+      end
+
+      it 'should work with geojson' do
+        get :index, format: 'geojson'
+        response.should be_successful
+        response.content_type.should == 'application/json'
+      end
+
+      it 'should work with kml' do
+        get :index, format: 'kml'
+        response.should be_successful
+        response.content_type.should == 'application/vnd.google-earth.kml+xml'
+      end
+
     end
 
   end
 
   describe 'show' do
 
-    it 'should work' do
-      get :show, id: moment.to_param
+    it 'should work as json' do
+      get :show, id: moment.to_param, format: 'json'
       response.should be_successful
+      response.content_type.should == 'application/json'
+    end
+
+    it 'should work as geojson' do
+      get :show, id: moment.to_param, format: 'geojson'
+      response.should be_successful
+      response.content_type.should == 'application/json'
+    end
+
+    it 'should work as kml' do
+      get :show, id: moment.to_param, format: 'kml'
+      response.should be_successful
+      response.content_type.should == 'application/vnd.google-earth.kml+xml'
     end
 
   end
