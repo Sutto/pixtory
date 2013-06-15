@@ -44,7 +44,7 @@ class DumpGenerator
 
   def dump_geojson
     logger.info "About to generate GeoJSON"
-    generate_and_upload 'moments.geojson' do |file|
+    generate_and_upload 'moments.geojson', 'application/json' do |file|
       serialized = MomentGeoJsonSerializer.collection(moments, controller: dump_context)
       file.puts ActiveSupport::JSON.encode(serialized)
     end
@@ -53,7 +53,7 @@ class DumpGenerator
 
   def dump_kml
     logger.info "About to generate KML"
-    generate_and_upload 'moments.kml' do |file|
+    generate_and_upload 'moments.kml', 'application/vnd.google-earth.kml+xml' do |file|
       rendered = KmlFeedGenerator.render(moments)
       file.write rendered
     end
@@ -65,7 +65,7 @@ class DumpGenerator
     @moments ||= Moment.all
   end
 
-  def generate_and_upload(name)
+  def generate_and_upload(name, content_type)
     file = Tempfile.new(name)
     yield file if block_given?
     file.flush
