@@ -1,8 +1,7 @@
 class Web::MomentsController < ApplicationController
 
   def index
-    @moments = Moment.all
-    @page_title = "All of Pixtory"
+    @page_title = "Explore your Pixtory"
   end
 
   def show
