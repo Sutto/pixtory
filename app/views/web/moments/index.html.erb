@@ -1,3 +1,8 @@
 <div id='moments' data-moment-type="<%= moment_fetcher.type %>">
   <%= render partial: 'moment', collection: moment_fetcher.moments %>
 </div>
+
+<div id='moment-overlay'>
+  <div id='overlay-background'></div>
+  <div id='overlay-inner'></div>
+</div>

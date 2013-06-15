@@ -38,6 +38,12 @@
   self.init = function() {
     moments = $('#moments');
     self.configureGrid();
+    moments.delegate('.moment', 'click', function(e) {
+      e.preventDefault();
+      var current = $(this);
+      var moment = $('<div />', {'class': 'moment expanded'}).append(current.find('.moment-full'));
+      P.Overlay.show(moment);
+    })
   };
 
   self.configureGrid = function() {

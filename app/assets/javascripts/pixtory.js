@@ -1,11 +1,13 @@
 //= require_self
 //= require pixtory/location_manager
 //= require pixtory/moment_list
+//= require pixtory/overlay
 //= require pixtory/client
 
 var Pixtory = {
 
   init: function() {
+    this.Overlay.init();
     this.LocationManager.init();
     this.MomentList.init();
   },

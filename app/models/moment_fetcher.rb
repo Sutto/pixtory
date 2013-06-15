@@ -23,6 +23,10 @@ class MomentFetcher
     metadata.fetch(:type, "default")
   end
 
+  def had_location_information?
+    params[:lat].present? and params[:lng].present?
+  end
+
   private
 
   def distance

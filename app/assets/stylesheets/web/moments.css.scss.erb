@@ -1,3 +1,58 @@
+#no-moments-nearby {
+  width: 480px;
+  text-align: center;
+  margin: 100px auto;
+  color: #444;
+  font-size: 18px;
+  line-height: 1.5em;
+  p { margin: 0; }
+}
+
+#welcome {
+  width: 460px;
+  margin: 100px auto;
+  background: #FFF;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px;
+
+  #introduction {
+    color: #333;
+    margin: 10px 0 20px;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: center;
+  }
+
+  #exploration-choices {
+    text-align: center;
+    margin: 0 0 10px;
+
+    span.or {
+      color: #999;
+      padding: 0 5px;
+      font-size: 14px;
+    }
+
+    a {
+      padding: 10px 15px;
+      border: 1px solid #EEE;
+      box-shadow: 1px 1px 1px #999;
+      display: inline-block;
+      background: url(<%= asset_path 'button-overlay.png' %>) center center repeat-x #F9F9F9;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #982f2b;
+
+      &:hover {
+        background: #FFF;
+        color: #621e1c;
+      }
+
+    }
+  }
+
+}
+
 #moments {
   padding: 0;
   text-align: center;
@@ -102,6 +157,40 @@
 
     h2 { font-size: 12px; }
 
+  }
+
+}
+
+#moment-overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+
+  #overlay-background {
+    background: rgba(255, 255, 255, 0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
+
+  #overlay-inner {
+    margin: 0;
+    z-index: 150;
+    top: 0;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    display: block;
+
+    .moment {
+      margin: 0;
+    }
   }
 
 }
