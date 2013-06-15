@@ -83,7 +83,7 @@ describe MomentSerializer do
 
     it 'should have no links without a controller' do
       subject.should have_key :links
-      subject[:links].should == []
+      subject[:links].should == {}
     end
 
     context 'with a controller' do
@@ -103,31 +103,23 @@ describe MomentSerializer do
 
       it 'should have links' do
         subject[:links].should be_present
-        subject[:links].should be_a Array
+        subject[:links].should be_a Hash
       end
 
       it 'should have a link to the web version' do
-        link = subject[:links].detect { |l| l[:rel] == 'web' }
-        link.should be_present
-        link[:href].should == "moment=#{moment.to_param}"
+        subject[:links][:web].should == "moment=#{moment.to_param}"
       end
 
       it 'should have a link to the current version' do
-        link = subject[:links].detect { |l| l[:rel] == 'self' }
-        link.should be_present
-        link[:href].should == "#{moment.to_param}?format=json"
+        subject[:links][:self].should == "#{moment.to_param}?format=json"
       end
 
       it 'should have a link to the geojson version' do
-        link = subject[:links].detect { |l| l[:rel] == 'geojson' }
-        link.should be_present
-        link[:href].should == "#{moment.to_param}?format=geojson"
+        subject[:links][:geojson].should == "#{moment.to_param}?format=geojson"
       end
 
       it 'should have a link to the kml' do
-        link = subject[:links].detect { |l| l[:rel] == 'kml' }
-        link.should be_present
-        link[:href].should == "#{moment.to_param}?format=kml"
+        subject[:links][:kml].should == "#{moment.to_param}?format=kml"
       end
 
     end

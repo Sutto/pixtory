@@ -16,13 +16,7 @@ class MomentGeoJsonSerializer < ActiveModel::Serializer
   end
 
   def properties
-    {
-      id:        moment.id,
-      name:      moment.location,
-      location:  moment.location,
-      timestamp: moment.formatted_timestamp,
-      caption:   moment.caption
-    }
+    @properties ||= MomentSerializer.new(moment).serializable_hash
   end
 
   def geometry
