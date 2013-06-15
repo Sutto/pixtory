@@ -19,6 +19,10 @@ class MomentFetcher
     @metadata ||= {}
   end
 
+  def type
+    metadata.fetch(:type, "default")
+  end
+
   private
 
   def distance
@@ -37,6 +41,7 @@ class MomentFetcher
     return base_scope if metadata[:geolocation]
     # Otherwise, we fall back to returning them ordered by the most recent
     metadata[:all] = true
+    metadata[:type] = "all"
     base_scope.order('moments.id DESC')
   end
 
@@ -58,6 +63,7 @@ class MomentFetcher
     return base_scope if new_scope.empty?
     metadata[:geolocation] = true
     metadata[:within]      = distance
+    metadata[:type]        = "location"
     return new_scope
   end
 

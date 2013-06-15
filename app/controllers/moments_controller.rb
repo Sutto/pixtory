@@ -10,11 +10,12 @@ class MomentsController < ApplicationController
   end
 
   def index
-    fetcher = MomentFetcher.new params.slice(:lat, :lng, :page, :distance)
+    moments  = moment_fetcher.moments
+    metadata = moment_fetcher.metadata
     respond_to do |format|
-      format.json    { render json: fetcher.moments, meta: fetcher.metadata }
-      format.geojson { render json: MomentGeoJsonSerializer.collection(fetcher.moments, default_serializer_options), meta: fetcher.metadata }
-      format.kml     { render text: KmlFeedGenerator.render(fetcher.moments) }
+      format.json    { render json: moments, meta: metadata }
+      format.geojson { render json: MomentGeoJsonSerializer.collection(moments, default_serializer_options), meta: metadata }
+      format.kml     { render text: KmlFeedGenerator.render(moments) }
     end
   end
 
