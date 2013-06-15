@@ -5,14 +5,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   SIZES = {
-    primary:   [600, 600],
-    thumb:     [300, 300],
-    grid_base: [180, :relative],
-    grid_full: [400, :relative]
+    primary:    [600, 600],
+    thumb:      [300, 300],
+    grid_base:  [180, :relative],
+    grid_full:  [400, :relative],
+    repostable: [612, 612]
   }
 
   def self.size_for(width, height, name)
-    if name == :primary
+    if name == :full
       return [width, height]
     else
       w, h = SIZES[name]
@@ -46,6 +47,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process normalize_uploaded_image: 90
     process resize_to_fill: SIZES[:thumb]
+  end
+
+  version :repostable do
+    process normalize_uploaded_image: 90
+    process resize_to_fill: SIZES[:repostable]
   end
 
   def store_dir

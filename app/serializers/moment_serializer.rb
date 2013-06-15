@@ -15,11 +15,9 @@ class MomentSerializer < ActiveModel::Serializer
   end
 
   def image
-    {
-      full:    {url: object.image.url, width: object.width, height: object.height},
-      primary: {url: object.image.url(:primary), width: 600, height: 300},
-      thumb:   {url: object.image.url(:thumb), width: 300, height: 300}
-    }
+    [:full, :primary, :thumb].each_with_object({}) do |v, images|
+      images[v] = image_version(v)
+    end
   end
 
   def location
@@ -29,6 +27,14 @@ class MomentSerializer < ActiveModel::Serializer
       lat:  coords.lat,
       lng:  coords.lon
     }
+  end
+
+  private
+
+  def image_version(name)
+    url = (name == :full ? object.image.url : object.image.url(name))
+    width, height = object.image_size name
+    return {url: url, width: width, height: height}
   end
 
 end

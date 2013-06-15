@@ -47,7 +47,7 @@ class Moment < ActiveRecord::Base
     end
   end
 
-  def image_size(name = :primary)
+  def image_size(name)
     ImageUploader.size_for width, height, name
   end
 
