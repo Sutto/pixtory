@@ -19,7 +19,7 @@ class DumpGenerator
     @remote_storage ||= begin
       key_id            = ENV['S3_ACCESS_KEY_ID'],
       secret_access_key = ENV['S3_SECRET_ACCESS_KEY']
-      raise "You must provide S3 details" if key_id.blank? or secret_access_key.blank? or bucket.blank?
+      raise "You must provide S3 details" if key_id.blank? or secret_access_key.blank?
       Fog::Storage.new({
         provider:              'AWS',
         aws_access_key_id:     key_id,
