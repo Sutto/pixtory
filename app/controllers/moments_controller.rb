@@ -17,7 +17,7 @@ class MomentsController < ApplicationController
     scope    = scope_with_pages scope, metadata
     respond_to do |format|
       format.json    { render json: scope, meta: metadata }
-      format.geojson { render json: MomentGeoJsonSerializer.collection(scope), meta: metadata }
+      format.geojson { render json: MomentGeoJsonSerializer.collection(scope, default_serializer_options), meta: metadata }
       format.kml     { render text: KmlFeedGenerator.render(scope) }
     end
   end

@@ -4,10 +4,10 @@ class MomentGeoJsonSerializer < ActiveModel::Serializer
 
   alias moment object
 
-  def self.collection(moments)
+  def self.collection(moments, options = {})
     {
       type:     'FeatureCollection',
-      features: moments.map { |m| new(m).serializable_hash }
+      features: moments.map { |m| new(m, options).serializable_hash }
     }
   end
 
@@ -16,7 +16,7 @@ class MomentGeoJsonSerializer < ActiveModel::Serializer
   end
 
   def properties
-    @properties ||= MomentSerializer.new(moment).serializable_hash
+    @properties ||= MomentSerializer.new(moment, options).serializable_hash
   end
 
   def geometry
