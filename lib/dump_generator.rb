@@ -1,5 +1,6 @@
 require 'tempfile'
 require 'kml_feed_generator'
+require 'dump_generator'
 
 class DumpGenerator
 
@@ -44,7 +45,7 @@ class DumpGenerator
   def dump_geojson
     logger.info "About to generate GeoJSON"
     generate_and_upload 'moments.geojson' do |file|
-      serialized = MomentGeoJsonSerializer.collection(file)
+      serialized = MomentGeoJsonSerializer.collection(moments, controller: dump_context)
       file.puts ActiveSupport::JSON.encode(serialized)
     end
     logger.info "Generated GeoJSON"
@@ -80,6 +81,10 @@ class DumpGenerator
       dir_name = ENV['S3_BUCKET_KEY'] || "pixtory-dumps"
       storage.directories.new(key: dir_name, public: true)
     end
+  end
+
+  def dump_context
+    @dump_context ||= DumpContext.new
   end
 
 end

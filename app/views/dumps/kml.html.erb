@@ -1,0 +1,3 @@
+<h2><%= link_to @moment.title, explore_moment_url(@moment) %></h2>
+<p style='text-align: center;'><%= image_tag @moment.image.url, alt: @moment.caption %></p>
+<p>Used under <%= @moment.license %> from <%= link_to @moment.source_name, (@moment.source_url || "#") %>.</p>

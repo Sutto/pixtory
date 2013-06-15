@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'set'
+require 'dump_context'
 
 class KmlFeedGenerator
 
@@ -13,8 +14,8 @@ class KmlFeedGenerator
     make_document.to_xml
   end
 
-  def self.render(moments)
-    new(moments).render
+  def self.render(*args)
+    new(*args).render
   end
 
   def make_builder(&block)
@@ -24,7 +25,9 @@ class KmlFeedGenerator
   def add_moment_to_builder(builder, moment)
     builder.Placemark do
       builder.name moment.title
-      builder.description "This is where things wil go..."
+      builder.description do
+        builder.cdata dump_context.render_template("kml", moment)
+      end
       builder.Point do
         builder.coordinates "#{moment.coordinates.lon},#{moment.coordinates.lat}"
       end
@@ -41,6 +44,10 @@ class KmlFeedGenerator
         end
       end
     end
+  end
+
+  def dump_context
+    @dump_context ||= DumpContext.new
   end
 
 end
