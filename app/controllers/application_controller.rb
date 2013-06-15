@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :moment_fetcher
 
+  layout :computed_layout
+
   private
 
   def default_serializer_options
@@ -13,6 +15,16 @@ class ApplicationController < ActionController::Base
 
   def moment_fetcher
     @moment_fetcher ||= MomentFetcher.new(params.slice(:lat, :lng, :page, :distance))
+  end
+
+  private
+
+  def computed_layout
+    if request.xhr?
+      return false
+    else
+      return "application"
+    end
   end
 
 end
