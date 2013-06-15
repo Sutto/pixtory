@@ -1,24 +1,22 @@
-Pixtory.LocationManager = {
+(function(P, $, undefined) {
 
-  lat: null,
-  lng: null,
+  var self = P.LocationManager  = {};
+  self.lat                      = null;
+  self.lng                      = null;
+  self.allowsLocation           = false;
 
-  // Are we allowed to process locations?
-  allowsLocation: true,
+  self.init = function() {
+    self.updateLocation();
+  };
 
-  init: function() {
-    this.updateLocation();
-  },
-
-  setCoordinates: function(coordinates) {
-    this.lat = coordinates.latitude;
-    this.lng = coordinates.longitude;
-    console.log("Set coords to", this.lat, "and", this.lng);
+  self.setCoordinates = function(coordinates) {
+    self.lat = coordinates.latitude;
+    self.lng = coordinates.longitude;
+    console.log("Set coords to", self.lat, "and", self.lng);
     // TODO: Broadcast an even here.
-  },
+  };
 
-  updateLocation: function() {
-    var self = this;
+  self.updateLocation = function() {
     navigator.geolocation.getCurrentPosition(function(result) {
       // On success, do something...
       console.log(result)
@@ -27,7 +25,6 @@ Pixtory.LocationManager = {
     }, function() {
       self.allowsLocation = false;
     });
-  }
+  };
 
-
-};
+})(Pixtory, jQuery);

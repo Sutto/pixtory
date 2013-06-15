@@ -1,6 +1,8 @@
-Pixtory.Client = {
+(function(P, $, undefined) {
 
-  fetchRenderedMoments: function(lat, lng, page) {
+  var self = P.Client = {};
+
+  self.fetchRenderedMoments = function(lat, lng, page) {
     var paginated;
     var options = {lat: lat, lng: lng}
     if(page == undefined) {
@@ -18,6 +20,6 @@ Pixtory.Client = {
         paginated: paginated
       }
     });
-  }
+  };
 
-};
+})(Pixtory, jQuery);
