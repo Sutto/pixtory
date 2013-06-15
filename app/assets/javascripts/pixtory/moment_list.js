@@ -41,7 +41,7 @@
     moments.delegate('.moment', 'click', function(e) {
       e.preventDefault();
       var current = $(this);
-      var moment = $('<div />', {'class': 'moment expanded'}).append(current.find('.moment-full'));
+      var moment = $('<div />', {'class': 'moment expanded'}).append(current.find('.moment-full').clone());
       P.Overlay.show(moment);
     })
   };
