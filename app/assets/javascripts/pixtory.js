@@ -5,8 +5,7 @@
 var Pixtory = {
 
   lastType: null,
-
-  var lastPage = null;
+  lastPage: null,
 
   init: function() {
     console.log("Taking over the world...");
