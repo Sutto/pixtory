@@ -63,6 +63,14 @@ describe MomentSerializer do
     subject[:image][:thumb][:height].should be_present
   end
 
+  it 'should include square image details' do
+    subject[:image].should be_present
+    subject[:image][:square].should be_present
+    subject[:image][:square][:url].should be_present
+    subject[:image][:square][:width].should be_present
+    subject[:image][:square][:height].should be_present
+  end
+
   it 'should include the caption' do
     subject[:caption].should be_present
     subject[:caption].should == moment.caption

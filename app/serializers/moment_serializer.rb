@@ -15,7 +15,7 @@ class MomentSerializer < ActiveModel::Serializer
   end
 
   def image
-    [:full, :primary, :thumb].each_with_object({}) do |v, images|
+    [:full, :primary, :thumb, :square].each_with_object({}) do |v, images|
       images[v] = image_version(v)
     end
   end
