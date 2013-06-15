@@ -31,6 +31,4 @@ class MomentSerializer < ActiveModel::Serializer
     }
   end
 
-  private
-
 end
