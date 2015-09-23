@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.3'
 
 gem 'rails', '~> 4.0.0'
 gem 'pg'
@@ -52,11 +52,9 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.0'
 end
 
-# gem 'debugger', group: [:development, :test]
-
 group :test do
   gem 'simplecov', require: nil
   gem 'syntax', require: nil
   gem 'rr', '~> 1.0.0', require: nil
-  gem 'debugger'
+
 end
