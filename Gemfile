@@ -43,6 +43,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem 'dotenv-rails'
+
 group :doc do
   gem 'sdoc', require: false
 end

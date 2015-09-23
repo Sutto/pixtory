@@ -50,6 +50,8 @@ GEM
     coffee-script-source (1.6.3)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
+    dotenv-rails (0.8.0)
+      dotenv (= 0.8.0)
     erubis (2.7.0)
     excon (0.25.3)
     execjs (1.4.0)
@@ -204,6 +206,7 @@ DEPENDENCIES
   bugsnag
   carrierwave
   coffee-rails (~> 4.0.0)
+  dotenv-rails
   faraday
   fastimage
   fog
